@@ -1,0 +1,35 @@
+.search {
+    width: 40%;
+    height: 2em;
+    font-size: 2em;
+    margin: 0 10em;
+}
+
+.search-result li {
+    color: green;
+    height: 2em;
+    font-size: 1.5em;
+    padding: 0.5em;
+    margin: 0 12em;
+    list-style: none;
+    border-bottom: 2px gray solid;
+    width: 30%;
+}
+
+.search-result li:hover {
+    background-color: gray;
+    cursor: pointer;
+    color: white;
+}
+
+.search-result a {
+    text-decoration: none;
+}
+
+.loading {
+    height: 2em;
+    font-size: 1.5em;
+    padding: 0.5em;
+    margin: 0 12em;
+    width: 30%;
+}
