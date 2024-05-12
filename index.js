@@ -17,6 +17,22 @@ async function get(url) {
   }
 }
 
+function addToFav(id) {
+  return (e) => {
+    let list = JSON.parse(localStorage.getItem("movies"));
+    if (!list) list = {};
+    if (list[id] !== undefined) {
+      delete list[id];
+      e.target.classList.remove("fav");
+    } else {
+      list[id] = 1;
+      e.target.classList.add("fav");
+    }
+    localStorage.setItem("movies", JSON.stringify(list));
+    console.log(localStorage.getItem("movies"), list);
+  };
+}
+
 function setLoading(state) {
   if (state) {
     searchResult.innerHTML = "<h3 class='loading'>...loading</h4>";
@@ -28,15 +44,23 @@ function renderError() {
   searchResult.innerHTML = "<h1 class='loading'> No results found!</h1>";
 }
 function renderResults(result) {
+  const favMovies = JSON.parse(localStorage.getItem("movies"));
+
   searchResult.innerHTML = "";
   result.forEach((movie) => {
     const title = movie.Title;
+    const button = document.createElement("button");
     const link = document.createElement("a");
-    link.setAttribute("href", `./movie.html?id=${movie.imdbID}`);
     const movieItem = document.createElement("li");
-    link.append(movieItem);
-    movieItem.innerHTML = title;
-    searchResult.append(link);
+    const { imdbID } = movie;
+    link.setAttribute("href", `./movie.html?id=${imdbID}`);
+    button.innerHTML = "add to Fav";
+    link.innerHTML = title;
+    button.addEventListener("click", addToFav(imdbID));
+    if (favMovies[imdbID]) button.classList.add("fav");
+    movieItem.append(link);
+    movieItem.append(button);
+    searchResult.append(movieItem);
   });
   console.log(result);
 }
