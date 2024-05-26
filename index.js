@@ -70,7 +70,7 @@ function renderResults(result) {
   console.log(result);
 }
 
-function handleChange(e) {
+function handleKeyDown(e) {
   if (controller) {
     controller.abort();
   }
