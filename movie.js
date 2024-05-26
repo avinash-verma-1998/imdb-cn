@@ -1,5 +1,5 @@
 const id = window.location.search.split("=")[1];
-const url = `http://www.omdbapi.com/?apikey=2c9f0b30&i=${id}`;
+const url = `https://www.omdbapi.com/?apikey=2c9f0b30&i=${id}`;
 const poster = document.querySelector(".poster");
 const movieName = document.querySelector(".movie-name");
 const details = document.querySelector(".details");

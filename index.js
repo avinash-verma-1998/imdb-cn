@@ -1,5 +1,5 @@
 //api url
-const url = `http://www.omdbapi.com/?apikey=2c9f0b30&s=`;
+const url = `https://www.omdbapi.com/?apikey=2c9f0b30&s=`;
 const input = document.querySelector(".search");
 const searchResult = document.querySelector(".search-result");
 let controller;
