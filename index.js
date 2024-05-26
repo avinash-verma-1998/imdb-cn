@@ -17,16 +17,18 @@ async function get(url) {
   }
 }
 
-function addToFav(id) {
+function addToFav(id, name) {
   return (e) => {
     let list = JSON.parse(localStorage.getItem("movies"));
     if (!list) list = {};
     if (list[id] !== undefined) {
       delete list[id];
       e.target.classList.remove("fav");
+      e.target.innerHTML = "add to fav";
     } else {
-      list[id] = 1;
+      list[id] = name;
       e.target.classList.add("fav");
+      e.target.innerHTML = "Fav";
     }
     localStorage.setItem("movies", JSON.stringify(list));
     console.log(localStorage.getItem("movies"), list);
@@ -54,10 +56,13 @@ function renderResults(result) {
     const movieItem = document.createElement("li");
     const { imdbID } = movie;
     link.setAttribute("href", `./movie.html?id=${imdbID}`);
-    button.innerHTML = "add to Fav";
     link.innerHTML = title;
-    button.addEventListener("click", addToFav(imdbID));
-    if (favMovies[imdbID]) button.classList.add("fav");
+    button.innerHTML = "add to fav";
+    button.addEventListener("click", addToFav(imdbID, title));
+    if (favMovies && favMovies[imdbID]) {
+      button.innerHTML = "fav";
+      button.classList.add("fav");
+    }
     movieItem.append(link);
     movieItem.append(button);
     searchResult.append(movieItem);
@@ -86,4 +91,4 @@ function handleChange(e) {
     });
 }
 
-input.addEventListener("change", handleChange);
+input.addEventListener("keydown", handleChange);
